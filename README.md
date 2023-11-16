@@ -28,7 +28,7 @@ Le projet est divisé en plusieurs parties, chacune se concentrant sur un aspect
 
 - [**`part_1_1.sql`**](./part_1_1.sql): Création des tables initiales et ajout de contraintes.
 - [**`part_1_2.sql`**](./part_1_2.sql): Insertion des données générées avec Python et Faker.
-- [**`part_1_3.sql`**](./part_1_3_a.sql): Création de la vue `session_and_user`.
+- [**`part_1_3.sql`**](./part_1_3.sql): Création de la vue `session_and_user`.
 - [**`part_1_3_b.sql`**](./part_1_3_b.sql) & [**`part_1_3_b_view.sql`**](./part_1_3_b_view.sql): Ajout de colonne et
   création de vue pour les sessions par mois.
 - [**`part_1_3_c.sql`**](./part_1_3_c.sql): Création de la vue `very_active_users_may`.
