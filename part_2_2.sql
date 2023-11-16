@@ -4,6 +4,9 @@ SELECT EXTRACT(MONTH FROM subscribed_at) AS month,
     subscription_plan,
     SUM(paid) AS total_paid,
     COUNT(*) AS total_subscriptions
-FROM subscription
-GROUP BY month, subscription_plan
-ORDER BY month, subscription_plan;
+FROM
+    subscription
+GROUP BY
+    month, subscription_plan
+ORDER BY
+    month, subscription_plan;
