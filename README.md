@@ -9,6 +9,8 @@ création de structures de données appropriées, la gestion des contraintes et 
 
 Le projet est divisé en plusieurs parties, chacune se concentrant sur un aspect différent de la base de données :
 
+- [**questions.md**](./questions.md) : Liste des questions à traiter dans le projet.
+
 - [**Partie I : Création de la Base de Données**](#partie-i--création-de-la-base-de-données): Création de la base de
   données `app_auth` et de ses tables principales.
 - [**Partie II : Compréhension des Données**](#partie-ii--compréhension-des-données): Exploration approfondie des
