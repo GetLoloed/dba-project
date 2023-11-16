@@ -4,59 +4,51 @@ from datetime import datetime, timedelta
 
 faker = Faker()
 
-# Fonction pour générer une date aléatoire dans une plage donnée
 def random_date(start, end):
-    return start + timedelta(
-        seconds=random.randint(0, int((end - start).total_seconds())),
-    )
+    return start + timedelta(seconds=random.randint(0, int((end - start).total_seconds())))
 
-# Définir les plages de dates
 start_date = datetime(2023, 1, 1)
 end_date = datetime(2023, 6, 30)
 
-# Générer des données pour 100 utilisateurs
+# Générer des données pour les utilisateurs
 users = []
-for user_id in range(1, 101):
+for _ in range(100):
     created_at = random_date(start_date, end_date)
     users.append({
-        "user_id": user_id,
         "firstname": faker.first_name(),
         "lastname": faker.last_name(),
         "email": faker.email(),
         "username": faker.user_name(),
         "password": faker.password(),
-        "created_at": created_at
+        "created_at": created_at.strftime("%Y-%m-%d %H:%M:%S")
     })
 
-# Générer des données pour 85 vérifications d'email
+# Générer des données pour les vérifications d'email
 email_verifications = []
 for i in range(85):
     user = random.choice(users)
-    verified_at = random_date(user["created_at"], end_date)
+    verified_at = random_date(datetime.strptime(user["created_at"], "%Y-%m-%d %H:%M:%S"), end_date).strftime("%Y-%m-%d %H:%M:%S")
     email_verifications.append({
-        "uev_id": i + 1,
-        "user_id": user["user_id"],
+        "user_id": users.index(user) + 1,
         "verified_at": verified_at
     })
 
-# Générer des données pour 1000 sessions
+# Générer des données pour les sessions
 sessions = []
-for session_id in range(1, 1001):
+for i in range(1000):
     user = random.choice(users)
-    connected_at = random_date(user["created_at"], end_date)
+    user_created_at = datetime.strptime(user["created_at"], "%Y-%m-%d %H:%M:%S")
+    session_date = random_date(user_created_at, end_date).strftime("%Y-%m-%d %H:%M:%S")
     sessions.append({
-        "session_id": session_id,
-        "user_id": user["user_id"],
-        "connected_at": connected_at
+        "user_id": users.index(user) + 1,
+        "connected_at": session_date
     })
 
 # Écrire les données dans le fichier SQL
 with open('part_1_2.sql', 'w') as file:
     for user in users:
-        file.write(f"INSERT INTO \"user\" (firstname, lastname, email, username, password, created_at) VALUES ('{user['firstname']}', '{user['lastname']}', '{user['email']}', '{user['username']}', '{user['password']}', '{user['created_at'].strftime('%Y-%m-%d %H:%M:%S')}');\n")
-
+        file.write(f"INSERT INTO \"user\" (firstname, lastname, email, username, password, created_at) VALUES ('{user['firstname']}', '{user['lastname']}', '{user['email']}', '{user['username']}', '{user['password']}', '{user['created_at']}');\n")
     for verification in email_verifications:
-        file.write(f"INSERT INTO user_email_verification (user_id, verified_at) VALUES ({verification['user_id']}, '{verification['verified_at'].strftime('%Y-%m-%d %H:%M:%S')}');\n")
-
+        file.write(f"INSERT INTO user_email_verification (user_id, verified_at) VALUES ({verification['user_id']}, '{verification['verified_at']}');\n")
     for session in sessions:
-        file.write(f"INSERT INTO session (user_id, connected_at) VALUES ({session['user_id']}, '{session['connected_at'].strftime('%Y-%m-%d %H:%M:%S')}');\n")
+        file.write(f"INSERT INTO session (user_id, connected_at) VALUES ({session['user_id']}, '{session['connected_at']}');\n")
