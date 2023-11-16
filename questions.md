@@ -32,6 +32,6 @@ Ce document résume l'état de chaque question traitée dans le projet.
 
 ## Partie V : Considérations Applicatives
 
-- `part_V_1` : Non
-- `part_V_2` : Non
-- `part_V_3` : Non
+- `part_V_1` : Oui
+- `part_V_2` : Oui
+- `part_V_3` : Oui
