@@ -38,7 +38,7 @@ sessions = []
 for _ in range(1000):
     user = random.choice(users)
     user_created_at = datetime.strptime(user["created_at"], "%Y-%m-%d %H:%M:%S")
-    connected_at = random_date(max(user_created_at, datetime.strptime(user["created_at"], "%Y-%m-%d %H:%M:%S")), end_date).strftime("%Y-%m-%d %H:%M:%S")
+    connected_at = random_date(user_created_at, end_date).strftime("%Y-%m-%d %H:%M:%S")
     sessions.append(f"INSERT INTO session_table (user_id, connected_at) VALUES ({user['user_id']}, '{connected_at}');\n")
 
 # Écriture des instructions SQL dans le fichier part_1_2.sql
