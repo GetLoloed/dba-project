@@ -5,8 +5,8 @@ CREATE TABLE user_table
     firstname  VARCHAR(255),
     lastname   VARCHAR(255),
     email      VARCHAR(255) UNIQUE,
-    username   VARCHAR(255) UNIQUE,
-    password   VARCHAR(255),
+    username   VARCHAR(255) UNIQUE CHECK (LENGTH(username) > 8),
+    password   VARCHAR(255) CHECK (LENGTH(password) > 8),
     created_at TIMESTAMP WITHOUT TIME ZONE
 );
 
